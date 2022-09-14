@@ -23,8 +23,13 @@ class User extends Authenticatable
         'cpf',
         'inscricao_estadual',
         'endereco',
+        'type',
         'password',
     ];
+
+    public function plantacoes(){
+        return $this->hasMany('App\Models\Plantacoes', 'plantacoes');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

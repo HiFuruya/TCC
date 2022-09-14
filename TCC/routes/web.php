@@ -22,7 +22,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-// Route::get('edit/{id}', 'App\Http\Controllers\Auth\RegisteredUserController@edit');
 Route::resource('/user', 'App\Http\Controllers\Auth\RegisteredUserController')->middleware(['auth']);
+Route::resource('/plantacoes', 'App\Http\Controllers\PlantacoesController')->middleware(['auth']);
 
 require __DIR__.'/auth.php';

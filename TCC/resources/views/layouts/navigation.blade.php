@@ -12,7 +12,8 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link : :active="request()->routeIs('')">
+                    <x-nav-link href="{{ route('plantacoes.index') }}" 
+                                :active="request()->routeIs('plantacoes.index')">
                         {{ __('Plantações') }}
                     </x-nav-link>
                 </div>

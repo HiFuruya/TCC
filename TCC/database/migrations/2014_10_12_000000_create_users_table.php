@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('cpf')->unique();
             $table->integer('inscricao_estadual')->unique();
             $table->string('endereco');
+            $table->unsignedBigInteger('type')->references('id')->on('roles');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
