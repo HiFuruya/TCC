@@ -11,7 +11,8 @@ class PlantacoesController extends Controller
 {
     public function index()
     {
-        return view('plantacoes.index');
+        $plantacoes = LinkPlantacoes::with(['plantacoes'])->where('user_id', Auth::user()->id)->get();
+        return view('plantacoes.index', compact('plantacoes'));
     }
 
     public function create()
