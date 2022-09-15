@@ -23,11 +23,6 @@ class PlantacoesController extends Controller
 
     public function store(Request $request)
     {
-        $regras = [
-            'id' => 'required',
-        ];
-
-        $request->validate($regras);
 
         $plantacoes = Plantacoes::find($request->id);
 
@@ -39,7 +34,7 @@ class PlantacoesController extends Controller
 
         $linkPlantacoes->save();
 
-        return view('plantacoes.index');
+        return redirect()->route('plantacoes.index');
     }
 
     /**

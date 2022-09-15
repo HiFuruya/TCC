@@ -63,20 +63,20 @@ class RegisteredUserController extends Controller
     public function update(Request $request, User $user)
     {
         $regras=[
-            'name' => ['required', 'string', 'max:255'],
-            'endereco' => ['required', 'string'],
+            'name' => ['max:255'],
+            'endereco' => ['max:255'],
         ];
 
         if (strcmp($request->email, $user->email) != 0) {
-            $regras['email'] = ['required', 'string', 'email', 'max:255', 'unique:users'];
+            $regras['email'] = ['max:255', 'unique:users'];
         }
 
         if (strcmp($request->cpf, $user->cpf) != 0) {
-            $regras['cpf'] = ['required', 'unique:users'];
+            $regras['cpf'] = ['unique:users'];
         }
 
         if (strcmp($request->inscricao_estadual, $user->inscricao_estadual) != 0) {
-            $regras['inscricao_estadual'] = ['required', 'unique:users'];
+            $regras['inscricao_estadual'] = ['unique:users'];
         }
 
         $request->validate($regras);

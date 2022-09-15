@@ -16,7 +16,8 @@
                 <div class="col" >
                     <div class="form-floating mb-3 ">
                         <select name="id" 
-                                class="form-control {{ $errors->has('plantacoes_id') ? 'is-invalid' : '' }}">
+                                class="form-control"
+                                required>
                             <option value=""></option>
                             @foreach($plantacoes as $i)                        
                                 <option value="{{$i->id}}">
@@ -24,11 +25,6 @@
                                 </option>
                             @endforeach
                         </select>
-                        @if($errors->has('plantacoes_id'))
-                            <div class='invalid-feedback'>
-                                {{ $errors->first('plantacoes_id') }}
-                            </div>
-                        @endif
                     </div>
                 </div>
             </div>

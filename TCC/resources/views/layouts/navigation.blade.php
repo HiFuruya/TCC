@@ -20,6 +20,20 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('comprador.index') }}" 
+                                :active="request()->routeIs('comprador.index')">
+                        {{ __('Compradores') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('vendedor.index') }}" 
+                                :active="request()->routeIs('vendedor.index')">
+                        {{ __('Vendedores') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :active="request()->routeIs('')">
                         {{ __('Nota Fiscal') }}
                     </x-nav-link>

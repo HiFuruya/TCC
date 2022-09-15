@@ -31,6 +31,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Plantacoes', 'plantacoes');
     }
 
+    public function empresas(){
+        return $this->hasMany('App\Models\Empresa', 'empresas');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
