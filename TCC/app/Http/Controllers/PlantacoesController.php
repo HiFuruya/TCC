@@ -9,9 +9,18 @@ use Illuminate\Support\Facades\Auth;
 
 class PlantacoesController extends Controller
 {
+
+    public function __construct() {
+        $this->authorizeResource(Plantacoes::class, 'plantaco');
+    }
+
     public function index()
     {
-        $plantacoes = LinkPlantacoes::with(['plantacoes'])->where('user_id', Auth::user()->id)->get();
+        if (Auth::user()->type == 2) {
+            $plantacoes = LinkPlantacoes::with(['plantacoes', 'user'])->orderBy('user_id')->get();
+        }else{
+            $plantacoes = LinkPlantacoes::with(['plantacoes'])->where('user_id', Auth::user()->id)->get();
+        }
         return view('plantacoes.index', compact('plantacoes'));
     }
 
@@ -37,48 +46,23 @@ class PlantacoesController extends Controller
         return redirect()->route('plantacoes.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\LinkPlantacoes  $linkPlantacoes
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Plantacoes $linkPlantacoes)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\LinkPlantacoes  $linkPlantacoes
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Plantacoes $linkPlantacoes)
+    public function deletar(Request $request)
     {
-        //
+        $explode = explode('/', $request->url());
+        $user_id = $explode[4];
+        $plantacao_id = $explode[5];
+
+        $linkPlantacoes = new LinkPlantacoes;
+
+        $linkPlantacoes->where('plantacoes_id', $plantacao_id)->where('user_id', $user_id)->delete();
+
+        return redirect()->route('plantacoes.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateLinkPlantacoesRequest  $request
-     * @param  \App\Models\LinkPlantacoes  $linkPlantacoes
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Plantacoes $request, Plantacoes $linkPlantacoes)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\LinkPlantacoes  $linkPlantacoes
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Plantacoes $linkPlantacoes)
-    {
-        //
-    }
 }

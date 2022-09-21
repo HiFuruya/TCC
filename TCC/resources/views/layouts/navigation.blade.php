@@ -1,6 +1,15 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
-    <!-- Primary Navigation Menu -->
+    
+    <!--Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Bootstrap 5 / JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- JQuery / JS -->
+    <script src="{{ asset('build/assets/jquery-3.6.0.min.js') }}"></script>
+
+    <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
@@ -12,26 +21,32 @@
                 </div>
 
                 <!-- Navigation Links -->
+                @can('viewAny', 'App/Models/Plantacoes')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('plantacoes.index') }}" 
                                 :active="request()->routeIs('plantacoes.index')">
                         {{ __('Plantações') }}
                     </x-nav-link>
                 </div>
+                @endcan
 
+                @can('viewAny', 'App/Models/Compradores')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('comprador.index') }}" 
                                 :active="request()->routeIs('comprador.index')">
                         {{ __('Compradores') }}
                     </x-nav-link>
                 </div>
+                @endcan
 
+                @can('viewAny', 'App/Models/Vendedores')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('vendedor.index') }}" 
                                 :active="request()->routeIs('vendedor.index')">
                         {{ __('Vendedores') }}
                     </x-nav-link>
                 </div>
+                @endcan
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :active="request()->routeIs('')">

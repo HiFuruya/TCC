@@ -9,16 +9,22 @@ use Illuminate\Support\Facades\Auth;
 
 class VendedorController extends Controller
 {
+    public function __construct() {
+        $this->authorizeResource(Vendedores::class, 'vendedor');
+    }
+
     public function index()
     {
-        $vendedores = Vendedores::with('empresa')->get();
-        // foreach($vendedores as $item){
-        //     foreach($item->empresa as $teste){
-        //         echo $teste->nome;
-        //     }
+        if (Auth::user()->type == 2) {
+            $vendedores = Vendedores::with('empresa')->get();
+        }else{
+            $user_id = Auth::user()->id;
+            $vendedores = Vendedores::with('empresa')->
+                    whereHas('empresa',function($t)use($user_id){
+                $t->where('user_id',$user_id);
+            })->get();
+        }
 
-        // }
-        // dd($vendedores);
         return view('vendedor.index', compact('vendedores'));
     }
 
@@ -31,60 +37,66 @@ class VendedorController extends Controller
     {
 
         $regras=[
-            'nome' => ['max:255'],
-            'doc' => ['max:12'],
+            'nome' => 'max:255',
+            'doc' => 'max:12|unique:empresas',
         ];
 
-        $request->validate($regras);
+        $msgs = [
+            "max" => "O campo [:attribute] possui tamanho máximo de [:max] caracteres!",
+            "unique" => "Já possui um [:attribute] cadastrado"
+        ];
+
+        $request->validate($regras, $msgs);
 
         $vendedor = new Vendedores;
         $vendedor->save();
         
         $vendedor->empresa()->create([
-            'nome' => $request->nome,
+            'nome' => mb_strtoupper($request->nome, 'UTF-8'),
             'doc' => $request->doc,
             'user_id' => Auth::user()->id
         ]);
-
-        // $empresa = new Empresa;
-        // $empresa->nome = $request->nome;
-        // $empresa->doc = $request->doc;
-        // $empresa->user()->associate(Auth::user());
-        // $empresa->save();
-
-        // $vendedor = new Vendedores;
-        // $vendedor->empresa()->associate($empresa);
-        // $vendedor->save();
 
         return redirect()->route('vendedor.index');
     }
 
     public function show(Vendedores $vendedor)
     {
-        //
+        dd($vendedor);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Vendedores  $vendedor
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Vendedores $vendedor)
+    public function edit (Vendedores $vendedor)
     {
-        //
+        if (isset($vendedor)) {
+            return view('vendedor.edit', compact('vendedor'));
+        }  
+
+        return "<h1>Curso não Encontrado!</h1>";
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateVendedorRequest  $request
-     * @param  \App\Models\Vendedores  $vendedor
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Vendedores $vendedor)
     {
-        //
+        $regras=[
+            'nome' => 'max:255'
+        ];
+
+        $msgs = [
+            "max" => "O campo [:attribute] possui tamanho máximo de [:max] caracteres!"
+        ];
+
+        if ($request->doc != $vendedor->empresa[0]->doc) {
+            $regras['doc'] = 'max:12|unique:empresas';
+            $msgs['unique'] = "Já possui um [:attribute] cadastrado";
+        }
+
+        $request->validate($regras, $msgs);
+
+        $vendedor->empresa[0]->nome = mb_strtoupper($request->nome);
+        $vendedor->empresa[0]->doc = $request->doc;
+
+        $vendedor->empresa[0]->save();
+
+        return redirect()->route('vendedor.index');
     }
 
     /**

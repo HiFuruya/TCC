@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -15,33 +16,22 @@ use Symfony\Component\Console\Input\Input;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     *
-     * @return \Illuminate\View\View
-     */
+
     public function create()
     {
-        return view('auth.register');
+        $roles = Role::orderBy('name')->get();
+        return view('auth.register', compact('roles'));
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'cpf' => ['required', 'unique:users'],
-            'inscricao_estadual' => ['required', 'unique:users'],
-            'endereco' => ['required', 'string'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => ['string', 'max:255'],
+            'email' => ['string', 'email', 'max:255', 'unique:users'],
+            'cpf' => ['unique:users'],
+            'inscricao_estadual' => ['unique:users'],
+            'endereco' => ['string'],
+            'password' => ['confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
@@ -51,6 +41,7 @@ class RegisteredUserController extends Controller
             'inscricao_estadual' => $request->inscricao_estadual,
             'endereco' => $request->endereco,
             'password' => Hash::make($request->password),
+            'type' => $request->role
         ]);
 
         event(new Registered($user));

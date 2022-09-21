@@ -16,6 +16,7 @@ class PermissionController extends Controller {
         }
 
         session(['user_permissions' => $sess]);
+        
     }
 
     public static function isAuthorized($rule) { 

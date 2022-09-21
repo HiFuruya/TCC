@@ -24,7 +24,7 @@ Route::get('/dashboard', function () {
 
 Route::resource('/user', 'App\Http\Controllers\Auth\RegisteredUserController')->middleware(['auth']);
 Route::resource('/plantacoes', 'App\Http\Controllers\PlantacoesController')->middleware(['auth']);
+Route::get('/deletar/{user_id}/{plantacao_id}', 'App\Http\Controllers\PlantacoesController@deletar')->name('deletar');
 Route::resource('/comprador', 'App\Http\Controllers\CompradorController')->middleware(['auth']);
 Route::resource('/vendedor', 'App\Http\Controllers\VendedorController')->middleware(['auth']);
-
 require __DIR__.'/auth.php';
