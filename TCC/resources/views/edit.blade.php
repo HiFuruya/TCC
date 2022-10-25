@@ -27,27 +27,6 @@
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" value="{{ $user->email }}" required />
             </div>
 
-            <!-- CPF -->
-            <div class="mt-4">
-                <x-input-label for="cpf" :value="__('CPF')" />
-
-                <x-text-input id="cpf" class="block mt-1 w-full" type="number" name="cpf" value="{{ $user->cpf }}"  required />
-            </div>
-
-            <!-- Inscrção Estadual -->
-            <div class="mt-4">
-                <x-input-label for="inscricao_estadual" :value="__('Inscrição Estadual')" />
-
-                <x-text-input id="inscricao_estadual" class="block mt-1 w-full" type="number" name="inscricao_estadual" value="{{ $user->inscricao_estadual }}" required />
-            </div>
-
-            <!-- Endereço -->
-            <div class="mt-4">
-                <x-input-label for="endereco" :value="__('Endereço')" />
-
-                <x-text-input id="endereco" class="block mt-1 w-full" type="text" name="endereco" value=" {{ $user->endereco }}" required />
-            </div>
-
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="/dashboard">
                     {{ __('Voltar') }}

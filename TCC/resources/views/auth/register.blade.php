@@ -26,38 +26,6 @@
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
-            <!-- CPF -->
-            <div class="mt-4">
-                <x-input-label for="cpf" :value="__('CPF')" />
-
-                <x-text-input id="cpf" class="block mt-1 w-full" type="number" name="cpf" :value="old('cpf')" required />
-            </div>
-
-            <!-- Inscrção Estadual -->
-            <div class="mt-4">
-                <x-input-label for="inscricao_estadual" :value="__('Inscrição Estadual')" />
-
-                <x-text-input id="inscricao_estadual" class="block mt-1 w-full" type="number" name="inscricao_estadual" :value="old('inscricao_estadual')" required />
-            </div>
-
-            <!-- Endereço -->
-            <div class="mt-4">
-                <x-input-label for="endereco" :value="__('Endereço')" />
-
-                <x-text-input id="endereco" class="block mt-1 w-full" type="text" name="endereco" :value="old('endereco')" required />
-            </div>
-
-            <!-- Paper -->
-           <div class="mt-4">
-                <select name="role" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    @foreach($roles as $item)
-                        <option value="{{$item->id}}">
-                            {{ $item->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Password')" />

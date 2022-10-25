@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('link_plantacoes', function (Blueprint $table) {
+        Schema::create('negociantes', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome');
+            $table->string('telefone');
+            $table->boolean('tipo');
             $table->unsignedBigInteger('user_id')->references('id')->on('user');
-            $table->unsignedBigInteger('plantacoes_id')->references('id')->on('plantacoes');
-            $table->timestamps();
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('link_plantacoes');
+        //
     }
 };

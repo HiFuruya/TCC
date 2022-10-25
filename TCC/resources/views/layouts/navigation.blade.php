@@ -21,32 +21,19 @@
                 </div>
 
                 <!-- Navigation Links -->
-                @can('viewAny', 'App/Models/Plantacoes')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('plantacoes.index') }}" 
                                 :active="request()->routeIs('plantacoes.index')">
                         {{ __('Plantações') }}
                     </x-nav-link>
                 </div>
-                @endcan
 
-                @can('viewAny', 'App/Models/Compradores')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('comprador.index') }}" 
-                                :active="request()->routeIs('comprador.index')">
-                        {{ __('Compradores') }}
+                    <x-nav-link href="{{ route('negociantes.index') }}" 
+                                :active="request()->routeIs('negociantes.index')">
+                        {{ __('Negociantes') }}
                     </x-nav-link>
                 </div>
-                @endcan
-
-                @can('viewAny', 'App/Models/Vendedores')
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('vendedor.index') }}" 
-                                :active="request()->routeIs('vendedor.index')">
-                        {{ __('Vendedores') }}
-                    </x-nav-link>
-                </div>
-                @endcan
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :active="request()->routeIs('')">

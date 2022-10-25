@@ -5,18 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Empresa extends Model
+class Negociantes extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'nome',
-        'doc',
+        'telefone',
         'user_id'
     ];
-
-    public function relacao()
-    {
-        return $this->morphTo();
-    }
 }

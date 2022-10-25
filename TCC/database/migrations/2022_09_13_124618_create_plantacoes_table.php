@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('compradores', function (Blueprint $table) {
+        Schema::create('plantacoes', function (Blueprint $table) {
             $table->id();
-            $table->string('inscricao_estadual')->unique();
-            $table->string('municipio');
-            $table->string('endereco');
-            $table->timestamps();
+            $table->string('nome');
+            $table->string('lua');
+            $table->date('plantio');
+            $table->integer('mudas');
+            $table->unsignedBigInteger('user_id')->references('id')->on('user');
+            $table->unsignedBigInteger('planta_id')->references('id')->on('plantas');
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('compradors');
+        Schema::dropIfExists('link_plantacoes');
     }
 };

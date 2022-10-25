@@ -74,9 +74,7 @@
         }
         function remove() {
             let id = $('#id_remove').val();
-            console.log(id);
             let form = "form_" + $('#id_remove').val();
-            console.log(form);
             document.getElementById(form).submit();
             $("#removeModal").modal('hide')
         }

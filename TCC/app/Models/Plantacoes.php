@@ -10,10 +10,19 @@ class Plantacoes extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nome'
+        'nome',
+        'lua',
+        'plantio',
+        'mudas',
+        'user_id',
+        'planta_id'
     ];
 
     public function user(){
-        return $this->belongsToMany('App\Models\User', 'users');
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function planta(){
+        return $this->belongsTo('App\Models\Plantas');
     }
 }
