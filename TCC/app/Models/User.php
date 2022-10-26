@@ -12,11 +12,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -27,25 +22,23 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Plantacoes', 'plantacoes');
     }
 
-    public function empresas(){
-        return $this->hasMany('App\Models\Empresa', 'empresas');
+    public function negociantes(){
+        return $this->hasMany('App\Models\Negociantes', 'negociantes');
     }
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    public function produtos_vendas(){
+        return $this->hasMany('App\Models\ProdutosVenda', 'produtos_vendas');
+    }
+
+        public function insumos(){
+        return $this->hasMany('App\Models\Insumos', 'insumos');
+    }
+
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

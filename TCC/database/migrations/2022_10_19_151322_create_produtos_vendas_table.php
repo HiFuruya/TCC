@@ -8,10 +8,11 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('produtos_venda', function (Blueprint $table) {
+        Schema::create('produtos_vendas', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
             $table->unsignedBigInteger('planta_id')->references('id')->on('plantas');
+            $table->unsignedBigInteger('user_id')->references('id')->on('user');
         });
     }
 

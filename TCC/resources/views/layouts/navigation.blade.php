@@ -36,6 +36,20 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('insumos.index') }}" 
+                                :active="request()->routeIs('insumos.index')">
+                        {{ __('Insumos') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('produtos_vendas.index') }}" 
+                                :active="request()->routeIs('produtos_vendas.index')">
+                        {{ __('Produtos Vendidos') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :active="request()->routeIs('')">
                         {{ __('Nota Fiscal') }}
                     </x-nav-link>

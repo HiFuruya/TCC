@@ -37,7 +37,7 @@ class NegociantesController extends Controller
         $negociante->nome = mb_strtoupper($request->nome, 'UTF-8');
         $negociante->telefone = $request->telefone;
         $negociante->tipo = $request->tipo;
-        $negociante->user_id = Auth::user()->id;
+        $negociante->user()->associate(Auth::user());
         $negociante->save();
 
         return redirect()->route('negociantes.index');

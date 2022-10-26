@@ -15,14 +15,14 @@
 
             <!-- Name -->
             <div>
-                <x-input-label for="nome" :value="__('Name')" />
+                <x-input-label for="nome" :value="__('NOME')" />
 
                 <x-text-input id="nome" class="block mt-1 w-full" type="text" name="nome" :value="$negociante->nome" required autofocus />
             </div>
 
             <!-- Telefone -->
             <div class="mt-4">
-                <x-input-label for="telefone" :value="__('Telefone')" />
+                <x-input-label for="telefone" :value="__('TELEFONE')" />
 
                 <x-text-input id="telefone" class="block mt-1 w-full" type="number" name="telefone" :value="$negociante->telefone" required />
             </div>

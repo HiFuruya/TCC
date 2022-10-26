@@ -25,5 +25,6 @@ Route::get('/dashboard', function () {
 Route::resource('/user', 'App\Http\Controllers\Auth\RegisteredUserController')->middleware(['auth']);
 Route::resource('/plantacoes', 'App\Http\Controllers\PlantacoesController')->middleware(['auth']);
 Route::resource('/negociantes', 'App\Http\Controllers\NegociantesController')->middleware(['auth']);
-Route::resource('/prudotos', 'App\Http\Controllers\ProdutosController')->middleware(['auth']);
+Route::resource('/insumos', 'App\Http\Controllers\InsumosController')->middleware(['auth']);
+Route::resource('/produtos_vendas', 'App\Http\Controllers\ProdutosVendaController')->middleware(['auth']);
 require __DIR__.'/auth.php';

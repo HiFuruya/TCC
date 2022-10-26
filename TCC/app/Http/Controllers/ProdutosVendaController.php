@@ -2,39 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Plantas;
 use App\Models\ProdutosVenda;
-use App\Http\Requests\StoreProdutosVendaRequest;
-use App\Http\Requests\UpdateProdutosVendaRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProdutosVendaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $produtos_venda = ProdutosVenda::where('user_id', Auth::user()->id)->get();
+        return view('produtos_vendas.index', compact('produtos_venda'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $plantas = Plantas::all();
+        return view('produtos_vendas.create', compact('plantas'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreProdutosVendaRequest  $request
+     * @param  \App\Http\Requests\StoreProdutosRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProdutosVendaRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -42,10 +35,10 @@ class ProdutosVendaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProdutosVenda  $produtosVenda
+     * @param  \App\Models\Produtos  $produtos
      * @return \Illuminate\Http\Response
      */
-    public function show(ProdutosVenda $produtosVenda)
+    public function show($id)
     {
         //
     }
@@ -53,10 +46,10 @@ class ProdutosVendaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProdutosVenda  $produtosVenda
+     * @param  \App\Models\Produtos  $produtos
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProdutosVenda $produtosVenda)
+    public function edit($id)
     {
         //
     }
@@ -64,11 +57,11 @@ class ProdutosVendaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateProdutosVendaRequest  $request
-     * @param  \App\Models\ProdutosVenda  $produtosVenda
+     * @param  \App\Http\Requests\UpdateProdutosRequest  $request
+     * @param  \App\Models\Produtos  $produtos
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProdutosVendaRequest $request, ProdutosVenda $produtosVenda)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +69,10 @@ class ProdutosVendaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProdutosVenda  $produtosVenda
+     * @param  \App\Models\Produtos  $produtos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProdutosVenda $produtosVenda)
+    public function destroy($id)
     {
         //
     }

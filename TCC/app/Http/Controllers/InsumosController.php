@@ -2,35 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProdutosCompra;
+use App\Models\Insumos;
+use App\Models\Plantas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class ProdutosCompraController extends Controller
+class InsumosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $insumos = Insumos::where('user_id', Auth::user()->id)->get();
+        return view('insumos.index', compact('insumos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('insumos.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreProdutosRequest  $request
+     * @param  \App\Http\Requests\StoreProdutosVendaRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,10 +34,10 @@ class ProdutosCompraController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Produtos  $produtos
+     * @param  \App\Models\ProdutosVenda  $produtosVenda
      * @return \Illuminate\Http\Response
      */
-    public function show(ProdutosCompra $produtos)
+    public function show($id)
     {
         //
     }
@@ -52,7 +45,7 @@ class ProdutosCompraController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Produtos  $produtos
+     * @param  \App\Models\ProdutosVenda  $produtosVenda
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -63,8 +56,8 @@ class ProdutosCompraController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateProdutosRequest  $request
-     * @param  \App\Models\Produtos  $produtos
+     * @param  \App\Http\Requests\UpdateProdutosVendaRequest  $request
+     * @param  \App\Models\ProdutosVenda  $produtosVenda
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -75,7 +68,7 @@ class ProdutosCompraController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Produtos  $produtos
+     * @param  \App\Models\ProdutosVenda  $produtosVenda
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
