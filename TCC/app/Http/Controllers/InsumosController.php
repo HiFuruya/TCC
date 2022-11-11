@@ -61,14 +61,15 @@ class InsumosController extends Controller
         return redirect()->route('insumos.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ProdutosVenda  $produtosVenda
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $insumo = Insumos::find($id);
+
+        if(isset($insumo)){
+            $insumo->delete();
+
+            return redirect()->route('insumos.index');
+        }
+        return "<h1>Insumo não Encontrada!</h1>";
     }
 }

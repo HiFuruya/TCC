@@ -81,9 +81,12 @@ class PlantacoesController extends Controller
     {
         $plantacao = Plantacoes::find($id);
 
-        $plantacao->delete();
+        if(isset($plantacao)){
+            $plantacao->delete();
+            return redirect()->route('plantacoes.index');
+        }
+        return "<h1>Plantação não Encontrada!</h1>";
 
-        return redirect()->route('plantacoes.index');
     }
 
 }

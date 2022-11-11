@@ -26,5 +26,5 @@ Route::resource('/user', 'App\Http\Controllers\Auth\RegisteredUserController')->
 Route::resource('/plantacoes', 'App\Http\Controllers\PlantacoesController')->middleware(['auth']);
 Route::resource('/negociantes', 'App\Http\Controllers\NegociantesController')->middleware(['auth']);
 Route::resource('/insumos', 'App\Http\Controllers\InsumosController')->middleware(['auth']);
-Route::resource('/produtos_vendas', 'App\Http\Controllers\ProdutosVendaController')->middleware(['auth']);
+Route::resource('/produtos', 'App\Http\Controllers\ProdutosController')->middleware(['auth']);
 require __DIR__.'/auth.php';

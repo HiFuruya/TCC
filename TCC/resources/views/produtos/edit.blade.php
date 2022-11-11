@@ -9,14 +9,15 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('plantacoes.store') }}">
+        <form method="POST" action="{{ route('produtos.update', $produto->id) }}">
+            @method('PUT')
             @csrf
             
             <!-- Name -->
             <div class="mt-4">
                 <x-input-label for="nome" :value="__('NOME')" />
 
-                <x-text-input id="nome" class="block mt-1 w-full" type="text" name="nome" :value="old('nome')" required autofocus />
+                <x-text-input id="nome" class="block mt-1 w-full" type="text" name="nome" :value="$produto->nome" required autofocus />
             </div>
 
             <!-- Planta  -->
@@ -28,20 +29,16 @@
                         <select name="planta_id" 
                                 class="form-control"
                                 id="planta"
-                                required>
-                            <option value=""></option>
-                            @foreach($plantas as $i)                        
-                                <option value="{{$i->id}}">
-                                    {{$i->nome}}
-                                </option>
-                            @endforeach
+                                required
+                                disabled>
+                            <option>{{$planta->nome}}</option>
                         </select>
                     </div>
                 </div>
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('plantacoes.index') }}">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('produtos.index') }}">
                     {{ __('Voltar') }}
                 </a>
 

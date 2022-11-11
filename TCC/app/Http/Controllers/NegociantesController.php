@@ -70,8 +70,12 @@ class NegociantesController extends Controller
     {
         $negociante = Negociantes::find($id);
 
-        $negociante->delete();
+        if(isset($negociante)){
+            $negociante->delete();
+            return redirect()->route('negociantes.index');
+        }
 
-        return redirect()->route('negociantes.index');
+        return "<h1>Negociante não Encontrada!</h1>";
+
     }
 }

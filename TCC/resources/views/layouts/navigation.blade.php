@@ -43,8 +43,8 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('produtos_vendas.index') }}" 
-                                :active="request()->routeIs('produtos_vendas.index')">
+                    <x-nav-link href="{{ route('produtos.index') }}" 
+                                :active="request()->routeIs('produtos.index')">
                         {{ __('Produtos Vendidos') }}
                     </x-nav-link>
                 </div>

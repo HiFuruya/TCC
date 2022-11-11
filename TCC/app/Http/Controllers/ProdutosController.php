@@ -12,68 +12,67 @@ class ProdutosController extends Controller
     public function index()
     {
         $produtos_venda = Produtos::where('user_id', Auth::user()->id)->get();
-        return view('produtos_vendas.index', compact('produtos_venda'));
+        return view('produtos.index', compact('produtos_venda'));
     }
 
     public function create()
     {
         $plantas = Plantas::all();
-        return view('produtos_vendas.create', compact('plantas'));
+        return view('produtos.create', compact('plantas'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreProdutosRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $planta = Plantas::find($request->planta_id);
+
+        $produto = new Produtos;
+        $produto->nome = mb_strtoupper($request->nome,'UTF-8');
+        $produto->user_id = Auth::user()->id;
+        
+        $produto->planta()->associate($planta);
+
+        $produto->save();
+
+        return redirect()->route('produtos.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Produtos  $produtos
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Produtos  $produtos
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $produto = Produtos::find($id);
+        if(isset($produto)){
+            $planta = Plantas::find($produto->planta_id);
+            return view('produtos.edit', compact('produto','planta'));
+        }
+
+        return "<h1>Produto não Encontrado!<h1>";
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateProdutosRequest  $request
-     * @param  \App\Models\Produtos  $produtos
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $produto = Produtos::find($id);
+
+        $produto->fill([
+            'nome' => mb_strtoupper($request->nome, 'UTF-8'),
+        ]);
+
+        $produto->save();
+
+        return redirect()->route('produtos.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Produtos  $produtos
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $produto = Produtos::find($id);
+
+        if(isset($produto)){
+            $produto->delete();
+            return redirect()->route('produtos.index');
+        }
+        return "<h1>Produto não Encontrado!</h1>";
     }
 }
