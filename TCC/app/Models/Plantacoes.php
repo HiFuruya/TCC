@@ -18,10 +18,6 @@ class Plantacoes extends Model
         'planta_id'
     ];
 
-    public function user(){
-        return $this->belongsTo('App\Models\User');
-    }
-
     public function planta(){
         return $this->belongsTo('App\Models\Plantas');
     }

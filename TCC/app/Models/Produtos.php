@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProdutosVenda extends Model
+class Produtos extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,4 @@ class ProdutosVenda extends Model
         'planta_id'
     ];
 
-    public function user(){
-        return $this->belongsTo('App\Models\User');
-    }
 }

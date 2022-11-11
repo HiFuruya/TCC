@@ -13,7 +13,4 @@ class Plantas extends Model
         'nome'
     ];
 
-    public function user(){
-        return $this->belongsToMany('App\Models\User', 'users');
-    }
 }

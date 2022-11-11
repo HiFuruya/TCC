@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plantas;
-use App\Models\ProdutosVenda;
+use App\Models\Produtos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ProdutosVendaController extends Controller
+class ProdutosController extends Controller
 {
     public function index()
     {
-        $produtos_venda = ProdutosVenda::where('user_id', Auth::user()->id)->get();
+        $produtos_venda = Produtos::where('user_id', Auth::user()->id)->get();
         return view('produtos_vendas.index', compact('produtos_venda'));
     }
 

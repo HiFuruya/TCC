@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('plantas', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
             $table->string('nome');
         });
     }

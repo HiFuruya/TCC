@@ -20,49 +20,45 @@ class InsumosController extends Controller
         return view('insumos.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreProdutosVendaRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $insumo = new Insumos;
+        $insumo->nome = mb_strtoupper($request->nome, 'UTF-8');
+        $insumo->descricao = mb_strtoupper($request->descricao,'UTF-8');
+        $insumo->user_id = Auth::user()->id;
+        $insumo->save();
+
+        return redirect()->route('insumos.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ProdutosVenda  $produtosVenda
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ProdutosVenda  $produtosVenda
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $insumo = Insumos::find($id);
+        if (isset($insumo)) {
+            return view('insumos.edit', compact('insumo'));
+        }
+
+        return "<h1>Insumo não Encontrada!</h1>";
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateProdutosVendaRequest  $request
-     * @param  \App\Models\ProdutosVenda  $produtosVenda
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $insumo = Insumos::find($id);
+
+        $insumo->fill([
+            'nome' => mb_strtoupper($request->nome, 'UTF-8'),
+            'descricao' => mb_strtoupper($request->descricao, 'UTF-8')
+        ]);
+
+        $insumo->save();
+
+        return redirect()->route('insumos.index');
     }
 
     /**

@@ -29,12 +29,12 @@
 
             <div class="row">
                 <div class="mb-4">
-                    <div class="form-check form-check-inline p-0 m-0 ">
+                    <div class="form-check form-check-inline p-0 m-0 " >
                         <label class="btn-group" data-toggle="buttons">
-                            <input type="radio" name="tipo" value="1" @if($negociante->tipo == 1) checked @endif/>COMPRADOR
+                            <input type="radio" name="tipo" value="1" disabled @if($negociante->tipo == 1) checked @endif/>COMPRADOR
                         </label>
                         <label class="btn-group" data-toggle="buttons">
-                            <input type="radio" name="tipo" value="0" @if($negociante->tipo == 0) checked @endif/>VENDEDOR
+                            <input type="radio" name="tipo" value="0" disabled @if($negociante->tipo == 0) checked @endif/>VENDEDOR
                         </label>
                     </div>
                 </div>

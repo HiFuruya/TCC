@@ -14,13 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('plantacoes', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
+            $table->unsignedBigInteger('planta_id')->references('id')->on('plantas');
             $table->string('nome');
             $table->string('lua');
             $table->date('plantio');
             $table->integer('mudas');
-            $table->unsignedBigInteger('user_id')->references('id')->on('user');
-            $table->unsignedBigInteger('planta_id')->references('id')->on('plantas');
+            $table->integer('user_id');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

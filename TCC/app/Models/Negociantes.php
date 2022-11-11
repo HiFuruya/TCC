@@ -14,8 +14,4 @@ class Negociantes extends Model
         'telefone',
         'user_id'
     ];
-
-    public function user(){
-        return $this->belongsTo('App\Models\User');
-    }
 }

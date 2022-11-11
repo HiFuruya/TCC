@@ -14,11 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('negociantes', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
             $table->string('nome');
-            $table->string('telefone');
+            $table->integer('telefone');
             $table->boolean('tipo');
-            $table->unsignedBigInteger('user_id')->references('id')->on('user');
+            $table->integer('user_id');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -10,10 +10,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('insumos', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
             $table->string('nome');
             $table->text('descricao');
-            $table->unsignedBigInteger('user_id')->references('id')->on('user');
+            $table->integer('user_id');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

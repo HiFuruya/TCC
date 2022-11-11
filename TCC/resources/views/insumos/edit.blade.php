@@ -9,21 +9,22 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('insumos.store') }}">
+        <form method="POST" action="{{ route('insumos.update', $insumo->id) }}">
+            @method('PUT')
             @csrf
 
             <!-- Name -->
             <div>
                 <x-input-label for="nome" :value="__('NOME')" />
 
-                <x-text-input id="nome" class="block mt-1 w-full" type="text" name="nome" :value="old('nome')" required autofocus />
+                <x-text-input id="nome" class="block mt-1 w-full" type="text" name="nome" :value="$insumo->nome" required autofocus />
             </div>
 
             <!-- descricao -->
             <div class="mt-4">
                 <x-input-label for="descricao" :value="__('DESCRIÇÃO')" />
 
-                <textarea name="descricao" cols="43" rows="5" required></textarea>
+                <textarea name="descricao" cols="43" rows="5" required>{{$insumo->descricao}}</textarea>
             </div>
 
             <div class="flex items-center justify-end mt-4">

@@ -32,10 +32,9 @@ class PlantacoesController extends Controller
         $plantacao->plantio = $request->plantio;
         $plantacao->lua = $request->lua;
         $plantacao->mudas = $request->mudas;
+        $plantacao->user_id = Auth::user()->id;
 
         $plantacao->planta()->associate($planta);
-
-        $plantacao->user()->associate(Auth::user());
 
         $plantacao->save();
 

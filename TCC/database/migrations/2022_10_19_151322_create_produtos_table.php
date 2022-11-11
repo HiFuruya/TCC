@@ -8,16 +8,18 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('produtos_vendas', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome');
+        Schema::create('produtos', function (Blueprint $table) {
+            $table->id('id');
             $table->unsignedBigInteger('planta_id')->references('id')->on('plantas');
-            $table->unsignedBigInteger('user_id')->references('id')->on('user');
+            $table->string('nome');
+            $table->integer('user_id');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('produtos_venda');
+        Schema::dropIfExists('produto');
     }
 };

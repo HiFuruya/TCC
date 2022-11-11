@@ -11,11 +11,7 @@ class Insumos extends Model
 
     protected $fillable = [
         'nome',
-        'user_id',
-        'planta_id'
+        'descricao'
     ];
 
-    public function user(){
-        return $this->belongsTo('App\Models\User');
-    }
 }

@@ -22,22 +22,12 @@ class NegociantesController extends Controller
 
     public function store(Request $request)
     {
-        $regras=[
-            'nome' => 'max:255',
-            'telefone' => 'max:20'
-        ];
-
-        $msgs = [
-            "max" => "O campo [:attribute] possui tamanho máximo de [:max] caracteres!",
-        ];
-
-        $request->validate($regras,$msgs);
 
         $negociante = new Negociantes;
         $negociante->nome = mb_strtoupper($request->nome, 'UTF-8');
         $negociante->telefone = $request->telefone;
         $negociante->tipo = $request->tipo;
-        $negociante->user()->associate(Auth::user());
+        $negociante->user_id = Auth::user()->id;
         $negociante->save();
 
         return redirect()->route('negociantes.index');
@@ -52,30 +42,22 @@ class NegociantesController extends Controller
     public function edit($id)
     {
         $negociante = Negociantes::find($id);
+        if (isset($negociante)) {
+            return view('negociantes.edit', compact('negociante'));
+        }
 
-        return view('negociantes.edit', compact('negociante'));
+        return "<h1>Negociante não Encontrada!</h1>";
+
     }
 
     public function update(Request $request, $id)
     {
         $negociante = Negociantes::find($id);
 
-        $regras=[
-            'nome' => 'max:255',
-            'telefone' => 'max:20',
-        ];
-
-        $msgs = [
-            "max" => "O campo [:attribute] possui tamanho máximo de [:max] caracteres!"
-        ];
-
-        $request->validate($regras,$msgs);
-
         $negociante->fill([
             'nome' => mb_strtoupper($request->nome, 'UTF-8'),
             'telefone' => $request->telefone,
             'tipo' => $request->tipo,
-            'user_id' => Auth::user()->id
         ]);
 
         $negociante->save();
