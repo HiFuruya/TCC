@@ -9,27 +9,18 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('produtos.store') }}">
+        <form method="POST" action="{{ route('notas.store') }}">
             @csrf
-            
-            <!-- Name -->
-            <div class="mt-4">
-                <x-input-label for="nome" :value="__('NOME')" />
-
-                <x-text-input id="nome" class="block mt-1 w-full" type="text" name="nome" :value="old('nome')" required autofocus />
-            </div>
-
-            <!-- Planta  -->
 
                 <div class="mt-4" >
-                    <x-input-label for="planta" :value="__('TIPO DA PLANTAÇÃO')" />
-                    <div class="form-floating mb-3 ">
-                        <select name="planta_id" 
+                    <x-input-label for="negociante" :value="__('NEGOCIANTE')" />
+                    <div class="form-floating mb-3">
+                        <select name="negociante_id" 
                                 class="form-control"
-                                id="planta"
+                                id="negociante"
                                 required>
                             <option value=""></option>
-                            @foreach($plantas as $i)                        
+                            @foreach($negociantes as $i)                        
                                 <option value="{{$i->id}}">
                                     {{$i->nome}}
                                 </option>
@@ -38,13 +29,19 @@
                     </div>
                 </div>
 
+            <!-- Emissão  -->
+            <div class="mt-4">
+                <x-input-label for="emissao" :value="__('DATA DO PLANTIO')"  />
+                <x-text-input id="emissao" class="block mt-1 w-full" type="date" name="emissao" :value="old('emissao')" required autofocus />
+            </div>
+
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('produtos.index') }}">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route($tipo.'.index') }}">
                     {{ __('Voltar') }}
                 </a>
 
                 <x-primary-button class="ml-4">
-                    {{ __('Registrar') }}
+                    {{ __('Register') }}
                 </x-primary-button>
             </div>
         </form>

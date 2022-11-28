@@ -13,7 +13,7 @@
             @csrf
             
             <!-- Name -->
-            <div class="mt-4">
+            <div>
                 <x-input-label for="nome" :value="__('NOME')" />
 
                 <x-text-input id="nome" class="block mt-1 w-full" type="text" name="nome" :value="old('nome')" required autofocus />
@@ -21,8 +21,8 @@
 
             <!-- Planta  -->
 
-            <div class="row">
-                <div class="mt-4" >
+
+                <div class=" mt-4" >
                     <x-input-label for="planta" :value="__('TIPO DA PLANTAÇÃO')" />
                     <div class="form-floating mb-3 ">
                         <select name="planta_id" 
@@ -38,13 +38,12 @@
                         </select>
                     </div>
                 </div>
-            </div>
+
 
             <!-- Lua  -->
-            <div class="row">
                 <div class="mt-4" >
                     <x-input-label for="lua" :value="__('LUA DO PLANTIO')" />
-                    <div class="form-floating mb-3 ">
+                    <div class="form-floating">
                         <select name="lua" 
                                 class="form-control"
                                 id="lua"
@@ -57,7 +56,6 @@
                         </select>
                     </div>
                 </div>
-            </div>
 
             <!-- Mudas  -->
             <div class="mt-4">

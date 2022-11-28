@@ -45,7 +45,7 @@ class PlantacoesController extends Controller
         
         $plantacao = Plantacoes::find($id);
         if (isset($plantacao)) {
-            $plantas = Plantas::orderBy('nome')->get();
+            $plantas = Plantas::find($plantacao->id);
             return view('plantacoes.edit', compact('plantacao','plantas'));
         }
 
@@ -56,16 +56,12 @@ class PlantacoesController extends Controller
 
         $plantacao = Plantacoes::find($id);
 
-        $planta = Plantas::find($request->planta_id);
-
         $plantacao->fill([
             'nome' => mb_strtoupper($request->nome, 'UTF-8'),
             'plantio' => $request->plantio,
             'lua' => $request->lua,
             'mudas' => $request->mudas
         ]);
-
-        $plantacao->planta()->associate($planta);
 
         $plantacao->save();
 

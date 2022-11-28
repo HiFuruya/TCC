@@ -29,7 +29,6 @@
                         <select name="planta_id" 
                                 class="form-control"
                                 id="planta"
-                                required
                                 disabled>
                             <option>{{$planta->nome}}</option>
                         </select>

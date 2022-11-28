@@ -26,19 +26,11 @@
                 <div class="mt-4" >
                     <x-input-label for="planta" :value="__('TIPO DA PLANTAÇÃO')" />
                     <div class="form-floating mb-3 ">
-                        <select name="planta_id" 
+                        <select  
                                 class="form-control"
                                 id="planta"
-                                required>
-                            </option>
-                            @foreach($plantas as $i)                        
-                                <option value="{{$i->id}}"
-                                    @if($plantacao->planta_id == $i->id) 
-                                        selected
-                                    @endif>
-                                    {{$i->nome}}
-                                </option>
-                            @endforeach
+                                disabled>                    
+                                <option>{{$plantas->nome}}</option>
                         </select>
                     </div>
                 </div>

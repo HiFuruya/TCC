@@ -6,13 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Negociantes extends Model
+class Notas extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
-        'nome',
-        'telefone',
+        'negociante_id',
+        'emissao',
+        'valor_total'
     ];
+
+    public function negociante(){
+        return $this->belongsTo('App\Models\Negociantes');
+    }
 }

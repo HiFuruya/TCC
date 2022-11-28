@@ -1,0 +1,1 @@
+@extends('notas.index', ['tipo' => 'produtos_transacao', 'titulo' => 'VENDAS'])

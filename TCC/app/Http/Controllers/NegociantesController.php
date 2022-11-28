@@ -10,7 +10,7 @@ class NegociantesController extends Controller
 {
     public function index()
     {
-        $negociantes = Negociantes::where('user_id',Auth::user()->id)->get();
+        $negociantes = Negociantes::where('user_id',Auth::user()->id)->orderBy('nome')->get();
 
         return view('negociantes.index', compact('negociantes'));
     }
@@ -46,7 +46,7 @@ class NegociantesController extends Controller
             return view('negociantes.edit', compact('negociante'));
         }
 
-        return "<h1>Negociante não Encontrada!</h1>";
+        return "<h1>Negociante não Encontrado!</h1>";
 
     }
 
@@ -75,7 +75,7 @@ class NegociantesController extends Controller
             return redirect()->route('negociantes.index');
         }
 
-        return "<h1>Negociante não Encontrada!</h1>";
+        return "<h1>Negociante não Encontrado!</h1>";
 
     }
 }

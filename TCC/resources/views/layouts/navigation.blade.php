@@ -50,8 +50,16 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :active="request()->routeIs('')">
-                        {{ __('Nota Fiscal') }}
+                    <x-nav-link href="{{ route('produtos_transacao.index') }}"
+                                :active="request()->routeIs('produtos_transacao.index')">
+                        {{ __('Vendas') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('insumos_transacao.index') }}"
+                                :active="request()->routeIs('insumos_transacao.index')">
+                        {{ __('Compras') }}
                     </x-nav-link>
                 </div>
 
@@ -108,6 +116,30 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('plantacoes.index')" :active="request()->routeIs('plantacoes.index')">
+                {{ __('Plantações') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('negociantes.index')" :active="request()->routeIs('negociantes.index')">
+                {{ __('Negociantes') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos.index')">
+                {{ __('Prodotos Vendidos') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('insumos.index')" :active="request()->routeIs('insumos.index')">
+                {{ __('Insumos') }}
             </x-responsive-nav-link>
         </div>
 
