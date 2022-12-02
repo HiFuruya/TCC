@@ -22,6 +22,16 @@ class NegociantesController extends Controller
 
     public function store(Request $request)
     {
+        $regras = [
+            'telefone' => 'required|max:18|min:8'
+        ];
+
+        $msgs = [
+            "max" => "O campo [:attribute] possui tamanho máximo de [:max] caracteres!",
+            "min" => "O campo [:attribute] possui tamanho mínimo de [:min] caracteres!"
+        ];
+
+        $request->validate($regras, $msgs);
 
         $negociante = new Negociantes;
         $negociante->nome = mb_strtoupper($request->nome, 'UTF-8');

@@ -22,7 +22,6 @@
 
             <!-- Planta  -->
 
-            <div class="row">
                 <div class="mt-4" >
                     <x-input-label for="planta" :value="__('TIPO DA PLANTAÇÃO')" />
                     <div class="form-floating mb-3 ">
@@ -34,10 +33,8 @@
                         </select>
                     </div>
                 </div>
-            </div>
 
             <!-- Lua  -->
-            <div class="row">
                 <div class="mt-4" >
                     <x-input-label for="lua" :value="__('LUA DO PLANTIO')" />
                     <div class="form-floating mb-3 ">
@@ -52,7 +49,6 @@
                         </select>
                     </div>
                 </div>
-            </div>
 
             <!-- Mudas  -->
             <div class="mt-4">

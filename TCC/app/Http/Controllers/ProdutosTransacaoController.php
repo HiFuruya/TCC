@@ -8,29 +8,63 @@ use App\Models\Plantacoes;
 use App\Models\Produtos;
 use App\Models\ProdutosTransacao;
 use App\Models\Transacoes;
+use Illuminate\Http\Request;
 
 class ProdutosTransacaoController extends Controller
 {
 
     public function index()
     {
-        $notas = Notas::with('negociante')->where('tipo',1)->get();
-        
-        return view('produtos_transacao.index',compact('notas'));
+        $array = explode('?', $_SERVER['REQUEST_URI']);
+
+        $nota = Notas::with('negociante')->where('id', $array[1])->get();
+
+        $transacoes = Transacoes::where('nota_id', $array[1])->with('produto')->with('plantacao')->get();
+
+        return view('produtos_transacao.index', compact('transacoes', 'nota'));
     }
 
     public function create()
     {
-        $negociantes = Negociantes::where('tipo', 1)->orderBy('nome')->get();
-        $tipo = 'produtos_transacao';
+        $array = explode('?', $_SERVER['REQUEST_URI']);
+        $id = $array[1];
 
-        return view('notas.create', compact('negociantes','tipo'));
+        $produtos = Produtos::orderBy('nome')->get();
+        $plantacoes = Plantacoes::orderBy('nome')->get();
+
+        return view('produtos_transacao.create', compact('produtos', 'plantacoes', 'id'));
     }
 
 
-    public function store(StoreProdutosTransacaoRequest $request)
+    public function store(Request $request)
     {
-        //
+        $array = explode('?', $_SERVER['REQUEST_URI']);
+
+        $nota = Notas::find($array[1]);
+        $produto = Produtos::find($request->produto_id);
+        $plantacao = Plantacoes::find($request->plantacao_id);
+
+        $transacao = new Transacoes;
+
+        $transacao->quantidade = $request->quantidade;
+        $transacao->metodo = $request->metodo;
+        $transacao->valor_unitario = $request->valor_unitario;
+        $transacao->valor_total = $request->valor_unitario * $request->quantidade;
+        
+        $transacao->nota()->associate($nota);
+        $transacao->produto()->associate($produto);
+        $transacao->plantacao()->associate($plantacao);
+
+        $transacao->save();
+
+        $nota->valor_total += $transacao->valor_total;
+        $nota->save();
+
+        $plantacao->lucro += $nota->valor_total;
+        $plantacao->liquido += $plantacao->lucro;
+        $plantacao->save(); 
+
+        return redirect()->route('produtos_transacao.index', $nota->id);
     }
 
     public function show($id)

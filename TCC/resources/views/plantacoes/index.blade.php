@@ -18,14 +18,20 @@
             <table class="table align-middle table-striped text-center" >
                 <thead>
                 <tr>
-                    <th scope="col">Plantação</th>
-                    <th scope="col">Informações</th>
+                    <th scope="col">PLANTAÇÃO</th>
+                    <th scope="col">LUCRO</th>
+                    <th scope="col">GASTO</th>
+                    <th scope="col">LIQUÍDO</th>
+                    <th scope="col">INFORMAÇÕES</th>
                 </tr>
                 </thead>
                 <tbody>
                     @foreach ($plantacoes as $item)
                         <tr>
                             <td>{{ $item->nome }}</td>
+                            <td>{{ $item->lucro }}</td>
+                            <td>{{ $item->gasto }}</td>
+                            <td>{{ $item->liquido }}</td>
                                 <td>
                                         <a href= "" class="btn btn-primary">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#FFF" class="bi bi-info-circle-fill" viewBox="0 0 16 16">

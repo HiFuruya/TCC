@@ -28,12 +28,12 @@
 
             <div class="row">
                 <div class="mb-4">
-                    <div class="form-check form-check-inline p-0 m-0 mt-4   ">
+                    <div class="form-check form-check-inline p-0 m-0 mt-4">
                         <label class="btn-group ml-4" data-toggle="buttons" >
-                            <input type="radio" name="tipo" value="1"/>COMPRADOR
+                            <input type="radio" name="tipo" value="1" required/>COMPRADOR
                         </label>
                         <label class="btn-group ml-4" data-toggle="buttons">
-                            <input type="radio" name="tipo" value="0"/>VENDEDOR
+                            <input type="radio" name="tipo" value="0" required/>VENDEDOR
                         </label>
                     </div>
                 </div>

@@ -2,22 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\InsumosTransacao;
 use App\Models\Negociantes;
 use App\Models\Notas;
-use App\Models\ProdutosTransacao;
+use GuzzleHttp\Psr7\Uri;
 use Illuminate\Http\Request;
+use Illuminate\Routing\RouteUri;
 use Illuminate\Support\Facades\Auth;
 
 class NotasController extends Controller
 {
     public function index()
     {
+        $array = explode('?', $_SERVER['REQUEST_URI']);
+
+        if ($array[1] == 0) {
+            
+            $notas = Notas::with('negociante')->where('tipo',0)->get();
+            $tipo = 'insumos_transacao';
+            $titulo = 'COMPRAS';
+            
+        }else{
+
+            $notas = Notas::with('negociante')->where('tipo',1)->get();
+            $tipo = 'produtos_transacao';
+            $titulo = 'VENDAS';
+        }
+
+        $id = $array[1];
+
+        return view('notas.index',compact('notas', 'tipo', 'titulo', 'id'));
     }
 
     public function create()
     {
+        $array = explode('?', $_SERVER['REQUEST_URI']);
+        $id = $array[1];
 
+        if ($id == 1) {
+            $negociantes = Negociantes::where('tipo', 1)->get();
+        }else{
+            $negociantes = Negociantes::where('tipo', 0)->get();
+        }
+
+        return view('notas.create', compact('negociantes', 'id'));
     }
 
     public function store(Request $request)
@@ -45,9 +72,9 @@ class NotasController extends Controller
 
         if(isset($nota)){
             if ($nota->tipo = 0) {
-                return redirect()->route('insumos_transacao.show', $nota->id);
+                return redirect()->route('insumos_transacao.index', $nota->id);
             }else{
-                return redirect()->route('produtos_transacao.show', $nota->id);
+                return redirect()->route('produtos_transacao.index', $nota->id);
             }
         }
 

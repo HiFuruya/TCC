@@ -9,10 +9,10 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('produtos_transacao.update', $id) }}">
+        <form method="POST" action="{{ route('produtos_transacao.store', $id) }}">
             @csrf
 
-            <div class="mt-4" >
+            <div class="mt-1" >
                 <x-input-label for="produtos" :value="__('PRODUTO')" />
                 <div class="form-floating mb-3">
                     <select name="produto_id" 
@@ -51,6 +51,22 @@
             <div class="mt-4">
                 <x-input-label for="valor_unitario" :value="__('QUANTIDADE')"  />
                 <x-text-input id="quantidade" class="block mt-1 w-full" type="number" name="quantidade" :value="old('quantidade')" required autofocus />
+            </div>          
+
+            <!-- METODO  -->
+            <div class="mt-4" >
+                <x-input-label for="metodo" :value="__('MEDIDA')" />
+                <div class="form-floating">
+                    <select name="metodo" 
+                                class="form-control"
+                                id="metodo"
+                                required>
+                        <option value=""></option>
+                        <option value="UNIDADE">UNIDADE</option>
+                        <option value="QUILO">QUILO</option>
+                        <option value="LITRO">LITRO</option>
+                    </select>
+                </div>
             </div>
 
             <!-- VALOR UNITÁRIO -->
@@ -60,7 +76,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('produtos_transacao.show', $id) }}">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('produtos_transacao.index', $id) }}">
                     {{ __('Voltar') }}
                 </a>
 

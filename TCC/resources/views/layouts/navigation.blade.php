@@ -50,15 +50,16 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('produtos_transacao.index') }}"
-                                :active="request()->routeIs('produtos_transacao.index')">
+                    <x-nav-link href="{{ route('notas.index', 1) }}"
+                                active="{{strcmp($_SERVER['REQUEST_URI'], '/notas?1') == 0 ? true : false}}">
                         {{ __('Vendas') }}
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('insumos_transacao.index') }}"
-                                :active="request()->routeIs('insumos_transacao.index')">
+                    <x-nav-link href="{{ route('notas.index', 0) }}"
+                                active="{{strcmp($_SERVER['REQUEST_URI'], '/notas?0') == 0 ? true : false}}"
+                                >
                         {{ __('Compras') }}
                     </x-nav-link>
                 </div>
