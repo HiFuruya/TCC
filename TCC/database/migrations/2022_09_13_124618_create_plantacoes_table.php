@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('lua');
             $table->date('plantio');
             $table->integer('mudas');
-            $table->integer('lucro');
-            $table->integer('gasto');
-            $table->integer('liquido');
             $table->integer('user_id');
+            $table->double('gasto')->default(0);
+            $table->double('lucro')->default(0);
+            $table->double('liquido')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

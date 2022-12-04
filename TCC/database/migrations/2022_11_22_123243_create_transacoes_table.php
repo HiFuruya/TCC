@@ -19,10 +19,11 @@ return new class extends Migration
             $table->unsignedBigInteger('plantacao_id')->references('id')->on('plantacao');
             $table->unsignedBigInteger('produto_id')->references('id')->on('produtos')->nullable();
             $table->unsignedBigInteger('insumo_id')->references('id')->on('insumos')->nullable();
-            $table->integer('quantidade');
+            $table->double('quantidade');
             $table->string('metodo');
-            $table->integer('valor_unitario');
-            $table->integer('valor_total');
+            $table->double('valor_unitario');
+            $table->double('desconto')->default(0);
+            $table->double('valor_total');
             $table->timestamps();
             $table->softDeletes();
         });

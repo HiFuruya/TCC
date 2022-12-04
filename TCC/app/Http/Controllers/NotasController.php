@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Negociantes;
 use App\Models\Notas;
-use GuzzleHttp\Psr7\Uri;
 use Illuminate\Http\Request;
-use Illuminate\Routing\RouteUri;
 use Illuminate\Support\Facades\Auth;
 
 class NotasController extends Controller
@@ -17,13 +15,13 @@ class NotasController extends Controller
 
         if ($array[1] == 0) {
             
-            $notas = Notas::with('negociante')->where('tipo',0)->get();
+            $notas = Notas::with('negociante')->where('tipo',0)->where('user_id', Auth::user()->id)->get();
             $tipo = 'insumos_transacao';
             $titulo = 'COMPRAS';
             
         }else{
 
-            $notas = Notas::with('negociante')->where('tipo',1)->get();
+            $notas = Notas::with('negociante')->where('tipo',1)->where('user_id', Auth::user()->id)->get();
             $tipo = 'produtos_transacao';
             $titulo = 'VENDAS';
         }
@@ -71,7 +69,7 @@ class NotasController extends Controller
         $nota = Notas::find($id);
 
         if(isset($nota)){
-            if ($nota->tipo = 0) {
+            if ($nota->tipo == 0) {
                 return redirect()->route('insumos_transacao.index', $nota->id);
             }else{
                 return redirect()->route('produtos_transacao.index', $nota->id);

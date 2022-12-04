@@ -50,7 +50,7 @@
             <!-- QUANTIDADE  -->
             <div class="mt-4">
                 <x-input-label for="quantidade" :value="__('QUANTIDADE')"  />
-                <x-text-input id="quantidade" class="block mt-1 w-full" type="number" name="quantidade" :value="old('quantidade')" required autofocus />
+                <x-text-input id="quantidade" min="0.1" class="block mt-1 w-full" type="number" min="0.01" step=".01" name="quantidade" :value="old('quantidade')" required autofocus />
             </div>
 
             <!-- METODO  -->
@@ -65,6 +65,8 @@
                         <option value="UNIDADE">UNIDADE</option>
                         <option value="QUILO">QUILO</option>
                         <option value="LITRO">LITRO</option>
+                        <option value="CAIXA">CAIXA</option>
+                        <option value="SACO">SACO</option>
                     </select>
                 </div>
             </div>
@@ -72,7 +74,13 @@
             <!-- VALOR UNITÁRIO -->
             <div class="mt-4">
                 <x-input-label for="valor_unitario" :value="__('VALOR UNITÁRIO')"  />
-                <x-text-input id="valor_unitario" class="block mt-1 w-full" type="number" name="valor_unitario" :value="old('valor_unitario')" required autofocus />
+                <x-text-input id="valor_unitario" min="0.1" class="block mt-1 w-full" type="number" min="0.01" step=".01" name="valor_unitario" :value="old('valor_unitario')" required autofocus />
+            </div>
+
+            <!-- DESCONTO -->
+            <div class="mt-4">
+                <x-input-label for="desconto" :value="__('DESCONTO')"  />
+                <x-text-input id="desconto" min="0.1" class="block mt-1 w-full" type="number" min="0.01" step=".01" name="desconto" :value="old('desconto')" autofocus />
             </div>
 
             <div class="flex items-center justify-end mt-4">

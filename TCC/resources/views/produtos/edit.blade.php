@@ -22,7 +22,6 @@
 
             <!-- Planta  -->
 
-            <div class="row">
                 <div class="mt-4" >
                     <x-input-label for="planta" :value="__('TIPO DA PLANTAÇÃO')" />
                     <div class="form-floating mb-3 ">
@@ -34,7 +33,6 @@
                         </select>
                     </div>
                 </div>
-            </div>
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('produtos.index') }}">

@@ -25,6 +25,7 @@
                     <th scope="col">INFORMAÇÕES</th>
                     <th scope="col">MEDIDA</th>
                     <th scope="col">VALOR UNITÁRIO</th>
+                    <th scope="col">DESCONTO</th>
                     <th scope="col">TOTAL</th>
                     <th scope="col">INFORMAÇÕES</th>
                 </tr>
@@ -37,7 +38,8 @@
                             <td>{{ $item->quantidade}}</td>
                             <td>{{ $item->metodo}}</td>
                             <td>{{ $item->valor_unitario}}</td>
-                            <td>{{ ($item->valor_unitario * $item->quantidade)}}</td>
+                            <td>{{ $item->desconto}}</td>
+                            <td>{{ ($item->valor_total)}}</td>
                                 <td>
 
                                     <button type="submit" onclick="showRemoveModal('{{ $item->id }}', '{{ $item->nome }}')" class="btn btn-danger">

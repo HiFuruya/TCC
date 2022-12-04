@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('negociante_id')->references('id')->on('negociantes');
             $table->unsignedBigInteger('user_id')->references('id')->on('user');
             $table->date('emissao');
-            $table->integer('valor_total')->default(0);
+            $table->double('valor_total')->default(0);
             $table->boolean('tipo');
             $table->softDeletes();
             $table->timestamps();

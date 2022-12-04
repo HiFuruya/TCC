@@ -47,7 +47,10 @@ class InsumosTransacaoController extends Controller
         $transacao->quantidade = $request->quantidade;
         $transacao->metodo = $request->metodo;
         $transacao->valor_unitario = $request->valor_unitario;
-        $transacao->valor_total = $request->valor_unitario * $request->quantidade;
+        if ($transacao->desconto != null) {
+            $transacao->desconto = $request->desconto;
+        }
+        $transacao->valor_total = (($request->valor_unitario - $request->desconto) * $request->quantidade);
 
         $transacao->nota()->associate($nota);
         $transacao->insumo()->associate($insumo);
