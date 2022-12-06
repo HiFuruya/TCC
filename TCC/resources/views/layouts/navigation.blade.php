@@ -24,35 +24,35 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('plantacoes.index') }}" 
                                 :active="request()->routeIs('plantacoes.index')">
-                        {{ __('Plantações') }}
+                        {{ __('PLANTAÇÕES') }}
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('negociantes.index') }}" 
                                 :active="request()->routeIs('negociantes.index')">
-                        {{ __('Negociantes') }}
+                        {{ __('NEGOCIANTES') }}
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('insumos.index') }}" 
                                 :active="request()->routeIs('insumos.index')">
-                        {{ __('Insumos') }}
+                        {{ __('INSUMOS') }}
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('produtos.index') }}" 
                                 :active="request()->routeIs('produtos.index')">
-                        {{ __('Produtos Vendidos') }}
+                        {{ __('PRODUTOS PRODUZIDOS') }}
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('notas.index', 1) }}"
                                 active="{{strcmp($_SERVER['REQUEST_URI'], '/notas?1') == 0 ? true : false}}">
-                        {{ __('Vendas') }}
+                        {{ __('VENDAS') }}
                     </x-nav-link>
                 </div>
 
@@ -60,7 +60,7 @@
                     <x-nav-link href="{{ route('notas.index', 0) }}"
                                 active="{{strcmp($_SERVER['REQUEST_URI'], '/notas?0') == 0 ? true : false}}"
                                 >
-                        {{ __('Compras') }}
+                        {{ __('COMPRAS') }}
                     </x-nav-link>
                 </div>
 
@@ -122,25 +122,37 @@
 
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('plantacoes.index')" :active="request()->routeIs('plantacoes.index')">
-                {{ __('Plantações') }}
+                {{ __('PLANTAÇÕES') }}
             </x-responsive-nav-link>
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('negociantes.index')" :active="request()->routeIs('negociantes.index')">
-                {{ __('Negociantes') }}
+                {{ __('NEGOCIANTES') }}
             </x-responsive-nav-link>
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos.index')">
-                {{ __('Prodotos Vendidos') }}
+                {{ __('PRODUTODS PRODUZIDOS') }}
             </x-responsive-nav-link>
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('insumos.index')" :active="request()->routeIs('insumos.index')">
-                {{ __('Insumos') }}
+                {{ __('INSUMOS') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('notas.index', 1)" active="{{strcmp($_SERVER['REQUEST_URI'], '/notas?1') == 0 ? true : false}}">
+                {{ __('VENDAS') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('notas.index', 0)" active="{{strcmp($_SERVER['REQUEST_URI'], '/notas?0') == 0 ? true : false}}">
+                {{ __('COMPRAS') }}
             </x-responsive-nav-link>
         </div>
 
@@ -156,12 +168,19 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
+                    <x-responsive-nav-link href="{{route('user.edit', Auth::user())}}"
+>
+                        {{ __('Editar') }}
+                    </x-responsive-nav-link>
+
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
+                    
                 </form>
+
             </div>
         </div>
     </div>

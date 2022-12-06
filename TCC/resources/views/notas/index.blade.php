@@ -9,19 +9,18 @@
     </div>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xxl text-center text-gray-800 leading-tight">
             {{ $titulo }}
         </h2>
     </x-slot>
 
-    <h2 class="text-center">Tabela de <b>{{$titulo}}</b></h2>
             <table class="table align-middle table-striped text-center" >
                 <thead>
                 <tr>
                     <th scope="col">NEGOCIANTE</th>
                     <th scope="col">DATA DA EMISSÃO</th>
-                    <th scope="col">VALOR</th>
-                    <th scope="col">INFORMAÇÕES</th>
+                    <th scope="col" class="d-none d-md-table-cell">VALOR</th>
+                    <th scope="col">OPÇÕES</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,7 +28,7 @@
                         <tr>
                             <td>{{ $item->negociante->nome}}</td>
                             <td>{{ $item->emissao}}</td>
-                            <td>{{ $item->valor_total}}</td>
+                            <td class="d-none d-md-table-cell">{{ $item->valor_total}}</td>
                                 <td>
                                     <a href= "{{route($tipo.'.index', $item)}}" class="btn btn-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#FFF" class="bi bi-info-circle-fill" viewBox="0 0 16 16">

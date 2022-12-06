@@ -47,7 +47,7 @@ class InsumosTransacaoController extends Controller
         $transacao->quantidade = $request->quantidade;
         $transacao->metodo = $request->metodo;
         $transacao->valor_unitario = $request->valor_unitario;
-        if ($transacao->desconto != null) {
+        if ($request->desconto != null) {
             $transacao->desconto = $request->desconto;
         }
         $transacao->valor_total = (($request->valor_unitario - $request->desconto) * $request->quantidade);
@@ -61,8 +61,8 @@ class InsumosTransacaoController extends Controller
         $nota->valor_total += $transacao->valor_total;
         $nota->save();
 
-        $plantacao->gasto += $nota->valor_total;
-        $plantacao->liquido -= $plantacao->gasto;
+        $plantacao->gasto += $transacao->valor_total;
+        $plantacao->liquido -= $transacao->valor_total;
         $plantacao->save(); 
 
         return redirect()->route('insumos_transacao.index', $nota->id);
@@ -70,40 +70,20 @@ class InsumosTransacaoController extends Controller
 
     public function show($id)
     {
-        $transacoes = Transacoes::where('nota_id', $id)->with('insumos')->with('plantacoes')->get();
-
-        return view('insumos_transacao.show', compact('transacoes','id'));
     }
 
     public function edit($id)
     {
-        $insumos = Insumos::orderBy('nome')->get();
-        $plantacoes = Plantacoes::orderBy('nome')->get();
-
-        return view('insumos_transacao.create', compact('insumos', 'plantacoes', 'id'));
     }
 
     public function update(Request $request, $id)
     {
-        $transacao = new Transacoes;
-
-        $insumo = Insumos::find($request->insumo_id);
-        $plantacao = Plantacoes::find($request->plantacao_id);
-        $nota = Notas::find($request->id);
-
-        $transacao->quantidade = $request->quantidade;
-        $transacao->valor_unitario = $request->valor_unitario;
-        $transacao->insumo()->associate($insumo);
-        $transacao->plantacao()->associate($plantacao);
-        $transacao->nota()->associate($nota);
-
-        $transacao->save();
 
         return redirect()->route('insumos_transacao.index');
 
     }
 
-    public function destroy(InsumosTransacao $insumosTransacao)
+    public function destroy($id)
     {
         //
     }

@@ -9,23 +9,28 @@
     </div>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Plantações') }}
+        <h2 class="font-semibold text-xxl text-center text-gray-800 leading-tight">
+            {{ __('PLANTAÇÕES') }}
         </h2>
     </x-slot>
         <div class="col">
-            <h2 class="text-center">Tabela de <b>Plantações</b></h2>
             <table class="table align-middle table-striped text-center" >
                 <thead>
                 <tr>
                     <th scope="col">PLANTAÇÃO</th>
-                    <th scope="col">INFORMAÇÕES</th>
+                    <th scope="col" class="d-none d-md-table-cell">GANHOS</th>
+                    <th scope="col" class="d-none d-md-table-cell">GASTOS</th>
+                    <th scope="col" class="d-none d-md-table-cell">LUCRO</th>
+                    <th scope="col" >OPÇÕES</th>
                 </tr>
                 </thead>
                 <tbody>
                     @foreach ($plantacoes as $item)
                         <tr>
-                            <td>{{ $item->nome }}</td>
+                            <td >{{ $item->nome }}</td>
+                            <td class="d-none d-md-table-cell">{{ $item->lucro }}</td>
+                            <td class="d-none d-md-table-cell">{{ $item->gasto }}</td>
+                            <td class="d-none d-md-table-cell">{{ $item->liquido }}</td>
                                 <td>
                                     <a nohref style= "cursor:pointer" onclick="showInfoModal(['PLANTAÇÃO: {{$item->nome}}', 'PLANTIO: {{$item->plantio}}', 'TIPO: {{$item->planta->nome}}', 'LUA DO PLANTIO: {{$item->lua}}', 'MUDAS: {{$item->mudas}}', 'GANHOS: {{$item->lucro}}', 'GASTOS: {{$item->gasto}}', 'LÍQUIDO: {{$item->liquido}}'])" class="btn btn-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#FFF" class="bi bi-info-circle-fill" viewBox="0 0 16 16">

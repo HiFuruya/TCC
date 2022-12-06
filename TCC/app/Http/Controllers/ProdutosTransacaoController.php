@@ -49,7 +49,7 @@ class ProdutosTransacaoController extends Controller
         $transacao->quantidade = $request->quantidade;
         $transacao->metodo = $request->metodo;
         $transacao->valor_unitario = $request->valor_unitario;
-        if ($transacao->desconto != null) {
+        if ($request->desconto != null) {
             $transacao->desconto = $request->desconto;
         }
         $transacao->valor_total = (($request->valor_unitario - $request->desconto) * $request->quantidade);
@@ -63,8 +63,8 @@ class ProdutosTransacaoController extends Controller
         $nota->valor_total += $transacao->valor_total;
         $nota->save();
 
-        $plantacao->lucro += $nota->valor_total;
-        $plantacao->liquido += $plantacao->lucro;
+        $plantacao->lucro += $transacao->valor_total;
+        $plantacao->liquido += $transacao->valor_total;
         $plantacao->save(); 
 
         return redirect()->route('produtos_transacao.index', $nota->id);
@@ -72,39 +72,19 @@ class ProdutosTransacaoController extends Controller
 
     public function show($id)
     {
-        $transacoes = Transacoes::where('nota_id', $id)->with('produtos')->with('plantacoes')->get();
-
-        return view('produtos_transacao.show', compact('transacoes', 'id'));
     }
 
     public function edit($id)
     {
-        $produtos = Produtos::orderBy('nome')->get();
-        $plantacoes = Plantacoes::orderBy('nome')->get();
-
-        return view('produtos_transacao.create', compact('produtos', 'plantacoes', 'id'));
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateProdutosTransacaoRequest  $request
-     * @param  \App\Models\ProdutosTransacao  $produtosTransacao
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateProdutosTransacaoRequest $request, ProdutosTransacao $produtosTransacao)
+    public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ProdutosTransacao  $produtosTransacao
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ProdutosTransacao $produtosTransacao)
+    public function destroy($id)
     {
         //
     }

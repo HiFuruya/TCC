@@ -31,7 +31,7 @@
 
             <!-- Emissão  -->
             <div class="mt-4">
-                <x-input-label for="emissao" :value="__('DATA DO PLANTIO')"  />
+                <x-input-label for="emissao" :value="__('DATA DE EMISSÃO')"  />
                 <x-text-input id="emissao" class="block mt-1 w-full" type="date" name="emissao" :value="old('emissao')" required autofocus />
             </div>
 
