@@ -82,7 +82,37 @@ class NotasController extends Controller
 
     public function edit($id)
     {
-        
+        $nota = Notas::find($id);
+
+        if(isset($nota)){
+
+            $negociantes = Negociantes::where('tipo', $nota->tipo)->get();
+
+            return view('notas.edit', compact('nota', 'negociantes'));
+        }
+
+        return "<h1>Nota não Encontrada!</h1>";
+
+    }
+
+    public function update(Request $request, $id){
+
+        $nota = Notas::find($id);
+
+        if (isset($nota)) {
+            $nota->fill([
+                'emissao' => $request->emissao,
+            ]);
+
+            $negociante = Negociantes::find($request->negociante_id);
+
+            $nota->negociante()->associate($negociante);
+
+            $nota->save();
+
+            return redirect()->route('notas.index',$nota->tipo);
+
+        }
     }
 
     public function destroy($id)

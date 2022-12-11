@@ -23,7 +23,7 @@
             <div class="mt-4">
                 <x-input-label for="telefone" :value="__('TELEFONE')" />
 
-                <x-text-input id="telefone" class="block mt-1 w-full" type="tel" name="telefone" :value="old('telefone')" required />
+                <x-text-input id="telefone" class="block mt-1 w-full" type="tel" placeholder="99-99999-9999" pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}" name="telefone" :value="old('telefone')" required />
             </div>
 
             <div class="row">

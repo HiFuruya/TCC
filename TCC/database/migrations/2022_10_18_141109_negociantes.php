@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('negociantes', function (Blueprint $table) {
             $table->id('id');
             $table->string('nome');
-            $table->integer('telefone');
+            $table->string('telefone');
             $table->boolean('tipo');
             $table->integer('user_id');
             $table->timestamps();
