@@ -18,6 +18,6 @@ class Notas extends Model
     ];
 
     public function negociante(){
-        return $this->belongsTo('App\Models\Negociantes');
+        return $this->belongsTo('App\Models\Negociantes')->withTrashed();
     }
 }
