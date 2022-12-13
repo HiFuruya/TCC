@@ -29,7 +29,7 @@
                                 class="form-control"
                                 id="planta"
                                 disabled>
-                            <option>{{$planta->nome}}</option>
+                            <option>{{$produto->planta->nome}}</option>
                         </select>
                     </div>
                 </div>

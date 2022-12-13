@@ -9,7 +9,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('plantacoes.update', $plantacao) }}">
+        <form method="POST" action="{{ route('plantacoes.update', $plantacao->id) }}">
             @csrf
             @method('PUT')
             
@@ -29,7 +29,7 @@
                                 class="form-control"
                                 id="planta"
                                 disabled>                    
-                                <option>{{$plantas->nome}}</option>
+                                <option>{{$plantacao->planta->nome}}</option>
                         </select>
                     </div>
                 </div>

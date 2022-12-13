@@ -43,10 +43,9 @@ class ProdutosController extends Controller
 
     public function edit($id)
     {
-        $produto = Produtos::find($id);
+        $produto = Produtos::with('planta')->find($id);
         if(isset($produto)){
-            $planta = Plantas::find($produto->planta_id);
-            return view('produtos.edit', compact('produto','planta'));
+            return view('produtos.edit', compact('produto'));
         }
 
         return "<h1>Produto não Encontrado!<h1>";

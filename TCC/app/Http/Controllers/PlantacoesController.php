@@ -43,10 +43,9 @@ class PlantacoesController extends Controller
 
     public function edit($id){
         
-        $plantacao = Plantacoes::find($id);
+        $plantacao = Plantacoes::with('planta')->find($id);
         if (isset($plantacao)) {
-            $plantas = Plantas::find($plantacao->id);
-            return view('plantacoes.edit', compact('plantacao','plantas'));
+            return view('plantacoes.edit', compact('plantacao'));
         }
 
         return "<h1>Plantação não Encontrada!</h1>";

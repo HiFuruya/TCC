@@ -80,7 +80,7 @@
             <!-- DESCONTO -->
             <div class="mt-4">
                 <x-input-label for="desconto" :value="__('DESCONTO')"  />
-                <x-text-input id="desconto" min="0" class="block mt-1 w-full" type="number" min="0.01" step=".01" name="desconto" :value="old('desconto')" autofocus />
+                <x-text-input id="desconto" min="0" class="block mt-1 w-full" type="number" step=".01" name="desconto" :value="old('desconto')" autofocus />
             </div>
 
             <div class="flex items-center justify-end mt-4">

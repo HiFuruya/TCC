@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Negociantes;
 use App\Models\Notas;
+use App\Models\Plantacoes;
+use App\Models\Transacoes;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -113,10 +116,53 @@ class NotasController extends Controller
             return redirect()->route('notas.index',$nota->tipo);
 
         }
+
+        return "<h1>Nota não Encontrada!</h1>";
+
     }
 
     public function destroy($id)
     {
-        //
+        $nota = Notas::find($id);
+
+        if(isset($nota)){
+
+            $transacoes = Transacoes::where('nota_id', $id)->get();
+
+            if ($nota->tipo == 1) {
+                for ($i=0; $i < count($transacoes); $i++) { 
+
+                    $plantacao = Plantacoes::find($transacoes[$i]->plantacao_id);
+                    if ($plantacao != null) {
+
+                        $plantacao->lucro -= $transacoes[$i]->valor_total;
+                        $plantacao->liquido = ($plantacao->lucro - $plantacao->gasto);
+                        $plantacao->save();
+                    }
+                    
+                    $transacoes[$i]->delete();
+                }
+            }else{
+                for ($i=0; $i < count($transacoes); $i++) { 
+
+                    $plantacao = Plantacoes::find($transacoes[$i]->plantacao_id);
+                    if ($plantacao != null) {
+                        $plantacao->gasto -= $transacoes[$i]->valor_total;
+                        $plantacao->liquido = ($plantacao->lucro - $plantacao->gasto);
+                        $plantacao->save();
+                    }
+
+                    $transacoes[$i]->delete();
+                }
+            }
+
+
+            $nota->delete();
+
+            return redirect()->route('notas.index', $nota->tipo);
+        }
+
+        return "<h1>Nota não Encontrada!</h1>";
+
     }
 }

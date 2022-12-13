@@ -17,7 +17,10 @@ class Plantacoes extends Model
         'plantio',
         'mudas',
         'user_id',
-        'planta_id'
+        'planta_id',
+        'gasto',
+        'lucro',
+        'liquido'
     ];
 
     public function planta(){

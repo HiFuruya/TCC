@@ -87,13 +87,13 @@
                             @csrf
 
                             <x-dropdown-link class="text-center" href="{{ route('user.edit', Auth::user()) }}">
-                                {{ __('Editar') }}
+                                {{ __('EDITAR') }}
                             </x-dropdown-link>
 
                             <x-dropdown-link class="text-center" :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Logout') }}
+                                {{ __('SAIR') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -170,13 +170,13 @@
 
                     <x-responsive-nav-link href="{{route('user.edit', Auth::user())}}"
 >
-                        {{ __('Editar') }}
+                        {{ __('EDITAR') }}
                     </x-responsive-nav-link>
 
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('SAIR') }}
                     </x-responsive-nav-link>
                     
                 </form>
